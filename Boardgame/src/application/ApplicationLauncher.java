@@ -6,15 +6,18 @@ import model.Categorie;
 import model.CategorieMetVasteScore;
 import model.Categorie.CategorieMetVariabeleScore;
 
-import view.GameView;
+
+import view.MenuView;
 import view.View;
 
 public class ApplicationLauncher {
 
 	public static void main(String[] args) {
-		View v = new GameView("Yahtzee");
+		View v = new MenuView("Yahtzee");
 		
 		v.start();
+		
+		
 	}
 }
 		
