@@ -2,22 +2,19 @@ package application;
 
 import java.awt.event.KeyListener;
 
+import controller.GameMenuController;
 import model.Categorie;
 import model.CategorieMetVasteScore;
 import model.Categorie.CategorieMetVariabeleScore;
 
 
-import view.MenuView;
-import view.View;
+import view.GameMenuView;
+
 
 public class ApplicationLauncher {
 
 	public static void main(String[] args) {
-		View v = new MenuView("Yahtzee");
-		
-		v.start();
-		
-		
+		 GameMenuController gameMenu = new GameMenuController();
 	}
 }
 		
