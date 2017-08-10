@@ -4,14 +4,12 @@ import java.util.ArrayList;
 
 public class ControllerFacade {
 	private Speler speler;
-	private Dobbelsteen[] dobbelstenen = new Dobbelsteen[5];
+	private ArrayList<Dobbelsteen> dobbelstenen = new ArrayList<Dobbelsteen>();
 	private ArrayList<Observer> observers = new ArrayList();
 	
 	public ControllerFacade(Speler speler) {
 		this.setSpeler(speler);
-		for(int i = 0 ; i < 5 ; i++){
-			dobbelstenen[i] = new Dobbelsteen();
-		}
+		
 	}
 
 	private void setSpeler(Speler speler) {
@@ -22,6 +20,9 @@ public class ControllerFacade {
 		return this.speler;
 	}
 	
+	public int getDobbelsteenWaarde(int indexindobbelstenenlijst){
+		return dobbelstenen.get(indexindobbelstenenlijst).getWaardeDobbelsteen();
+	}
 	
 
 }

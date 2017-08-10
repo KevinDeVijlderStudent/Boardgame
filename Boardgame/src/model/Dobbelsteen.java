@@ -2,11 +2,13 @@ package model;
 
 public class Dobbelsteen {
 	private int waardeDobbelsteen;
+	private boolean kanGeroldWorden;
 
 	//Constructor
 	public Dobbelsteen(){
-		//bij het maken van een dobbelsteenobject, heeft deze meteen een waarde
+		//bij het maken van een dobbelsteenobject, heeft deze meteen een waarde en kan standaard mee gerold worden
 		this.rollDobbelsteen();
+		this.setKanGeroldWorden(true);
 	}
 	
 	//Getters en setters
@@ -27,6 +29,14 @@ public class Dobbelsteen {
 		int randomwaarde = (int)(Math.random()*6) + 1;
 		//zet de dobbelsteenwaarde op dit random getal
 		this.setWaardeDobbelsteen(randomwaarde);
+	}
+	
+	public boolean getKanGeroldWorden(){
+		return this.kanGeroldWorden;
+	}
+	
+	public void setKanGeroldWorden(boolean kanGeroldWorden){
+		this.kanGeroldWorden = kanGeroldWorden;
 	}
 	
 	

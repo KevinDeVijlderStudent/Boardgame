@@ -26,8 +26,6 @@ public class GameMenuController {
 		this.gameMenuFacade = gameMenuFacade;
 	}
 
-	
-
 	public GameMenuFacade getGameMenuFacade() {
 		return gameMenuFacade;
 	}
