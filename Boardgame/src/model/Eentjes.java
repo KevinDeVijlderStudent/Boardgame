@@ -29,11 +29,6 @@ public class Eentjes implements Observer {
 	}
 	
 	@Override
-	public void updateScore(ArrayList<Observer> observers) {
-		
-	}
-	
-	@Override
 	public int getWaarde() {
 		return waarde;
 	}

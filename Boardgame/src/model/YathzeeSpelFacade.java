@@ -9,6 +9,8 @@ public class YathzeeSpelFacade implements Subject {
 	private ArrayList<Dobbelsteen> gekozendobbelstenen = new ArrayList<Dobbelsteen>();
 	private ArrayList<Observer> observers = new ArrayList();
 	
+	private int aantalBeurten = 3;
+	
 	public YathzeeSpelFacade(Speler speler) {
 		this.setSpeler(speler);
 		for(int i = 0; i < 5; ++i){
@@ -31,8 +33,6 @@ public class YathzeeSpelFacade implements Subject {
 			registreerObserver(new Vijven());
 			registreerObserver(new Zessen());
 			
-			registreerObserver(new BovenBonus());
-			
 			registreerObserver(new DrieGelijken());
 			registreerObserver(new VierGelijken());
 			registreerObserver(new KleineStraat());
@@ -40,8 +40,6 @@ public class YathzeeSpelFacade implements Subject {
 			registreerObserver(new FullHouse());
 			registreerObserver(new Kans());
 			registreerObserver(new Yathzee());
-			
-			
 	}
 
 	private void setSpeler(Speler speler) {
@@ -146,5 +144,12 @@ public class YathzeeSpelFacade implements Subject {
 		} 
 	}
 	
+	//beurt functies
+	public void verlaagAantalBeurtenMetEen(){
+		this.aantalBeurten = this.aantalBeurten - 1;
+	}
 	
+	public int getAantalBeurten(){
+		return this.aantalBeurten;
+	}
 }

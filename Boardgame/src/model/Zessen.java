@@ -26,12 +26,6 @@ public class Zessen implements Observer{
 	}
 	
 	@Override
-	public void updateScore(ArrayList<Observer> observers) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
 	public int getWaarde() {
 		return this.waarde;
 	}

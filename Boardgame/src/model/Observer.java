@@ -5,8 +5,6 @@ import java.util.ArrayList;
 public abstract interface Observer {
 	  public abstract void updateWaarde(ArrayList<Dobbelsteen> dobbelstenen);
 	  
-	  public abstract void updateScore(ArrayList<Observer> observers);
-	  
 	  public abstract int getWaarde();
 	  
 	  public abstract void setWaarde(int waarde);

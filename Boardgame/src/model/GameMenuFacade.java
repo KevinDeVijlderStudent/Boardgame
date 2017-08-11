@@ -12,8 +12,7 @@ public class GameMenuFacade {
 	private GameMenuView gameMenuView;
 	private ArrayList<BoardController> boards = new ArrayList<BoardController>();
 	
-	
-	public GameMenuFacade(GameMenuController gameMenuController) {
+	public GameMenuFacade(GameMenuController gameMenuController){
 		this.gameMenuView = new GameMenuView(gameMenuController);
 	}
 	
@@ -31,6 +30,13 @@ public class GameMenuFacade {
 		return boards;
 	}
 	
-	
-
+	public boolean spelerBestaatAl(Speler speler){
+		boolean bestaatal = false;
+		for (int i = 0 ; i < getBoards().size() ; ++i){
+			if (boards.get(i).getYathzeeSpelFacade().getSpeler().equals(speler) == true){
+				bestaatal = true;
+			}
+		}
+		return bestaatal;
+	}
 }

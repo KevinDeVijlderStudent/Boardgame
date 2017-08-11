@@ -23,7 +23,7 @@ import model.Observer;
 public class BoardView extends JFrame {
 	
 	//te werpen dobbelstenen
-	JPanel dobbelstenenPanel = new JPanel(new FlowLayout());
+	private JPanel dobbelstenenPanel = new JPanel(new FlowLayout());
 	private JButton dobbelsteen1;
 	private JButton dobbelsteen2;
 	private JButton dobbelsteen3;
@@ -42,8 +42,14 @@ public class BoardView extends JFrame {
 	private ArrayList<JButton> gekozendobbelsteenbuttonlijst = new ArrayList<JButton>(5);
 	
 	//CategorieNamen
-	JPanel categorieEnScorenPanel = new JPanel(new FlowLayout());
+	private JPanel categorieEnScorenPanel = new JPanel(new FlowLayout());
 	private JComboBox<String> categorieNamen;
+	
+	//catgeorietabel met scores
+	private JButton bevestigcategorieButton;
+	
+	//beurten
+	private JLabel aantalBeurten;
 	
 	JPanel boardPanel = new JPanel(new BorderLayout());
 	private JLabel spelNaam;
@@ -133,14 +139,25 @@ public class BoardView extends JFrame {
 		gooiDobbelstenenButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setDobbelstenenSpeelbaar(boardcontroller);
-				setDobbelstenenClickable(boardcontroller);
+				setDobbelstenenAanklikbaar(boardcontroller);
 				boardcontroller.rollDobbelstenen();
+				verlaagAantalBeurten(boardcontroller);
+				aantalBeurten.setText("Aantal resterende beurten: " + Integer.toString(boardcontroller.getYathzeeSpelFacade().getAantalBeurten()));
+				if(boardcontroller.getYathzeeSpelFacade().getAantalBeurten() == 0){
+					setDobbelstenenNietSpeelbaar(boardcontroller);
+					setDobbelstenenNietAanklikbaar(boardcontroller);
+					gooiDobbelstenenButton.setEnabled(false);
+				}
 			}
 		});
 		dobbelstenenPanel.add(gooiDobbelstenenButton);
+		if(boardcontroller.getYathzeeSpelFacade().getAantalBeurten() == 0){
+			gooiDobbelstenenButton.setEnabled(false);
+		}
+	
 		boardPanel.add(dobbelstenenPanel,BorderLayout.LINE_START);
 		this.setDobbelstenenNietSpeelbaar(boardcontroller);
-		this.setDobbelstenenNotClickable(boardcontroller);
+		this.setDobbelstenenNietAanklikbaar(boardcontroller);
 		
 		//dobbelstenen die gekozen zijn
 		gekozendobbelsteen1 = new JButton();
@@ -180,7 +197,27 @@ public class BoardView extends JFrame {
 				boardcontroller.beurtEindigen(gekozenCategorie);
 			}
 		});
+		
+		this.bevestigcategorieButton = new JButton();
+		this.bevestigcategorieButton.setText("Bevestig categorie");
+		this.bevestigcategorieButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				bevestigGekozenCategorie();
+			}
+		});
+		if(boardcontroller.getYathzeeSpelFacade().getAantalBeurten() == 0){
+			bevestigcategorieButton.setEnabled(true);
+		} else {
+			bevestigcategorieButton.setEnabled(false);
+		}
+		this.categorieEnScorenPanel.add(bevestigcategorieButton);
+		
+		aantalBeurten = new JLabel("Aantal resterende beurten: ");
+		this.categorieEnScorenPanel.add(aantalBeurten);
+		
 		boardPanel.add(categorieEnScorenPanel, BorderLayout.LINE_END);
+		
+		
 		//voor de eerste ronde start moet de catgeorielijst al de eerste keer gegenereerd worden
 		genereerCategorieMenu(boardcontroller);
 		
@@ -227,7 +264,7 @@ public class BoardView extends JFrame {
 		boardController.getYathzeeSpelFacade().alleDobbelstenenMogenGeworpenWorden();;
 	}
 	
-	public void setDobbelstenenClickable(BoardController boardController){
+	public void setDobbelstenenAanklikbaar(BoardController boardController){
 		for (int i = 0 ; i < 5; ++i){
 			if(boardController.getYathzeeSpelFacade().dobbelsteenMagGeworpenWorden(i) == true){
 				this.dobbelsteenbuttonlijst.get(i).setEnabled(true);
@@ -241,7 +278,7 @@ public class BoardView extends JFrame {
 		boardController.getYathzeeSpelFacade().alleDobbelstenenMogenNietGeworpenWorden();;
 	}
 	
-	public void setDobbelstenenNotClickable(BoardController boardController){
+	public void setDobbelstenenNietAanklikbaar(BoardController boardController){
 		for (int i = 0 ; i < 5; ++i){
 			if(boardController.getYathzeeSpelFacade().dobbelsteenMagGeworpenWorden(i) == false){
 				this.dobbelsteenbuttonlijst.get(i).setEnabled(false);
@@ -250,8 +287,7 @@ public class BoardView extends JFrame {
 	}
 	
 	//functies voor het dropdownmenu
-	public void genereerCategorieMenu(BoardController boardcontroller)
-	  {
+	public void genereerCategorieMenu(BoardController boardcontroller) {
 		//eerst alle categorien verwijderen, daarna zetten we alle overgebleven categorien terug in de lijst
 	    this.categorieNamen.removeAllItems();
 	    
@@ -262,4 +298,13 @@ public class BoardView extends JFrame {
 	      }
 	    }
 	  }
+	
+	private void verlaagAantalBeurten(BoardController boardcontroller) {
+		boardcontroller.getYathzeeSpelFacade().verlaagAantalBeurtenMetEen();
+	}
+	
+	//functie voor catgeorie bevestigen button
+	private void bevestigGekozenCategorie() {
+		
+	}
 }

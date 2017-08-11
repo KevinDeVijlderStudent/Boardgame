@@ -17,6 +17,7 @@ public class GameMenuController {
 		this.gameMenuFacade.getGameMenuView().stop();
 		
 		Speler speler = gameMenuFacade.maakSpeler();
+		
 		BoardController board = new BoardController(speler,this);
 		board.stopBoard();
 		this.gameMenuFacade.getBoards().add(board);
