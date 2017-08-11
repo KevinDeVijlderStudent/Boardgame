@@ -1,64 +1,89 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 public class DrieGelijken implements Observer {
-	private String categorieNaam = "DrieGelijken";
 	private int waarde = 0;
-	private boolean alGebruikt = false;
+	private String categorieNaam = "Drie Gelijken";
+	private boolean alIngevuld = false;
+	
 	
 	@Override
-	public void updateDobbelsteen(ArrayList<Dobbelsteen> dobbelstenen) {
-		// TODO Auto-generated method stub
-		
+	public void updateWaarde(ArrayList<Dobbelsteen> dobbelstenen) {
+		if(this.alIngevuld == false){
+			this.waarde = 0;
+			ArrayList<Dobbelsteen> een = new ArrayList<Dobbelsteen>();
+			ArrayList<Dobbelsteen> twee = new ArrayList<Dobbelsteen>();
+			ArrayList<Dobbelsteen> drie = new ArrayList<Dobbelsteen>();
+			ArrayList<Dobbelsteen> vier = new ArrayList<Dobbelsteen>();
+			ArrayList<Dobbelsteen> vijf = new ArrayList<Dobbelsteen>();
+			ArrayList<Dobbelsteen> zes = new ArrayList<Dobbelsteen>();
+			for(int i = 0; i < dobbelstenen.size() ; ++i){
+				if(dobbelstenen.get(i).getWaardeDobbelsteen() == 1){
+					een.add(dobbelstenen.get(i));
+				} else if (dobbelstenen.get(i).getWaardeDobbelsteen() == 2){
+					twee.add(dobbelstenen.get(i));
+				} else if (dobbelstenen.get(i).getWaardeDobbelsteen() == 3){
+					drie.add(dobbelstenen.get(i));
+				} else if (dobbelstenen.get(i).getWaardeDobbelsteen() == 4){
+					vier.add(dobbelstenen.get(i));
+				} else if (dobbelstenen.get(i).getWaardeDobbelsteen() == 5){
+					vijf.add(dobbelstenen.get(i));
+				} else {
+					zes.add(dobbelstenen.get(i));
+				}
+			}
+			
+			if(een.size() >= 3 || twee.size() >= 3 || drie.size() >= 3 || vier.size() >= 3 || vijf.size() >= 3 || zes.size() >= 3) {
+				int tijdelijkewaarde = 0;
+				for(int i = 0 ; i < dobbelstenen.size() ; ++i){
+					tijdelijkewaarde += dobbelstenen.get(i).getWaardeDobbelsteen();
+				}
+				this.setWaarde(tijdelijkewaarde);
+			}
+		}
 	}
-
+	
 	@Override
 	public void updateScore(ArrayList<Observer> observers) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
 	public int getWaarde() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.waarde;
 	}
-
+	
 	@Override
-	public void resetAlsNietGebruikt() {
-		// TODO Auto-generated method stub
-		
+	public void setWaarde(int waarde) {
+		this.waarde = waarde;
 	}
-
+	
 	@Override
-	public boolean returnIsGebruikt() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean returnIsIngevuld() {
+		return alIngevuld;
 	}
-
+	
 	@Override
-	public void alGebruikt() {
-		// TODO Auto-generated method stub
-		
+	public void alIngevuldOpTrue() {
+		this.alIngevuld = true;
 	}
-
-	@Override
-	public void reset() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public String getCategorieNaam() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.categorieNaam;
 	}
 
 	@Override
-	public void setWaarde(int score) {
-		// TODO Auto-generated method stub
-		
+	public void zetWaardeopNul() {
+		this.setWaarde(0);
+		this.alIngevuld = false;
 	}
+	
+	
 
 }

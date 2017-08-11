@@ -3,62 +3,64 @@ package model;
 import java.util.ArrayList;
 
 public class Tweeen implements Observer {
-	private String categorieNaam = "Tweeen";
 	private int waarde = 0;
-	private boolean alGebruikt = false;
+	private String categorieNaam = "Tweeen";
+	private boolean alIngevuld = false;
 	
 	@Override
-	public void updateDobbelsteen(ArrayList<Dobbelsteen> dobbelstenen) {
-		// TODO Auto-generated method stub
-		
+	public void updateWaarde(ArrayList<Dobbelsteen> dobbelstenen) {
+		if(this.alIngevuld == false){
+			this.waarde = 0;
+			ArrayList<Dobbelsteen> twee = new ArrayList<Dobbelsteen>();
+			for(int i = 0; i < dobbelstenen.size() ; ++i){
+				if(dobbelstenen.get(i).getWaardeDobbelsteen() == 2){
+					twee.add(dobbelstenen.get(i));
+			}
+			
+			if(twee.size() >= 1) {
+				int tijdelijkewaarde = twee.size();
+				this.setWaarde(tijdelijkewaarde);
+			}
+		}
+		}
 	}
-
+	
 	@Override
 	public void updateScore(ArrayList<Observer> observers) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
 	public int getWaarde() {
-		// TODO Auto-generated method stub
-		return 0;
+		return waarde;
 	}
-
+	
 	@Override
-	public void resetAlsNietGebruikt() {
-		// TODO Auto-generated method stub
-		
+	public void setWaarde(int waarde) {
+		this.waarde = waarde;
 	}
-
+	
 	@Override
-	public boolean returnIsGebruikt() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean returnIsIngevuld() {
+		return this.alIngevuld;
 	}
-
+	
 	@Override
-	public void alGebruikt() {
-		// TODO Auto-generated method stub
-		
+	public void alIngevuldOpTrue() {
+		this.alIngevuld = true;
 	}
-
-	@Override
-	public void reset() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public String getCategorieNaam() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.categorieNaam;
 	}
 
 	@Override
-	public void setWaarde(int score) {
-		// TODO Auto-generated method stub
-		
+	public void zetWaardeopNul() {
+		this.setWaarde(0);
+		this.alIngevuld = false;
 	}
-
+	
+	
 }

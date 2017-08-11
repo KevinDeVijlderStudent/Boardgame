@@ -67,10 +67,5 @@ public class GameMenuView extends JFrame{
 	public void stop() {
 		setVisible(false);
 	}
-	
-
-	public void displayErrorMessage(String errorMessage){	         
-		JOptionPane.showMessageDialog(this, errorMessage);        
-    }
 
 }

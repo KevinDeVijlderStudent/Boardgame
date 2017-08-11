@@ -1,13 +1,13 @@
 package model;
 
-public class Dobbelsteen {
+public class Dobbelsteen implements Comparable<Dobbelsteen>{
 	private int waardeDobbelsteen;
 	private boolean kanGeroldWorden;
 
 	//Constructor
 	public Dobbelsteen(){
-		//bij het maken van een dobbelsteenobject, heeft deze meteen een waarde en kan standaard mee gerold worden
-		this.rollDobbelsteen();
+		//bij het maken van een dobbelsteenobject, heeft deze meteen een waarde  1 en kan standaard mee gerold worden
+		this.setWaardeDobbelsteen(1);
 		this.setKanGeroldWorden(true);
 	}
 	
@@ -37,6 +37,16 @@ public class Dobbelsteen {
 	
 	public void setKanGeroldWorden(boolean kanGeroldWorden){
 		this.kanGeroldWorden = kanGeroldWorden;
+	}
+
+	@Override
+	public int compareTo(Dobbelsteen o) {
+		if(this.waardeDobbelsteen == o.waardeDobbelsteen){
+			return 0;
+		} else {
+			return this.waardeDobbelsteen > o.waardeDobbelsteen ? 1 : -1;
+		}
+			
 	}
 	
 	

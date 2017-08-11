@@ -2,20 +2,29 @@ package model;
 
 import java.util.ArrayList;
 
-public class Eentjes implements Observer{
-	private String categorieNaam = "Eentjes";
+public class Eentjes implements Observer {
+	//waarde die deze catgeorie uiteindelijk gaat hebben , afhankelijk van hoeveel eentjes gegoooid
 	private int waarde = 0;
-	private boolean alGebruikt = false;
+	private String categorieNaam = "Eentjes";
+	//standaard is een categorie nog niet ingevuld , wanneer deze categorie wordt ingevuld => wordt op true gezet
+	private boolean alIngevuld = false;
 	
 	@Override
-	public void updateDobbelsteen(ArrayList<Dobbelsteen> dobbelstenen) {
-		if(this.alGebruikt == false){
+	public void updateWaarde(ArrayList<Dobbelsteen> dobbelstenen) {
+		//de categorie mag nog niet ingevuld zijn
+		if(this.alIngevuld == false){
 			this.waarde = 0;
-			for(int i = 0 ; i < dobbelstenen.size() ; ++i){
-				if( (dobbelstenen.get(i).getWaardeDobbelsteen() == 1) && (dobbelstenen.get(i).getKanGeroldWorden() == false) ){
-					this.waarde += 1;
-				}
+			ArrayList<Dobbelsteen> een = new ArrayList<Dobbelsteen>();
+			for(int i = 0; i < dobbelstenen.size() ; ++i){
+				if(dobbelstenen.get(i).getWaardeDobbelsteen() == 1){
+					een.add(dobbelstenen.get(i));
 			}
+			
+			if(een.size() >= 1) {
+				int tijdelijkewaarde = een.size();
+				this.setWaarde(tijdelijkewaarde);
+			}
+		}
 		}
 	}
 	
@@ -35,33 +44,25 @@ public class Eentjes implements Observer{
 	}
 	
 	@Override
-	public void reset() {
-		this.waarde = 0;
-		this.alGebruikt = false;
-	}
-	
-	@Override
-	public void resetAlsNietGebruikt() {
-		if (this.alGebruikt == false){
-			this.waarde = 0;
-			this.alGebruikt = false;
-	    }
-	}
-	
-	@Override
-	public boolean returnIsGebruikt() {
-		return this.alGebruikt;
+	public boolean returnIsIngevuld() {
+		return this.alIngevuld;
 	}
 	
 	@Override
 	
-	public void alGebruikt() {
-		this.alGebruikt = true;
+	public void alIngevuldOpTrue() {
+		this.alIngevuld = true;
 	}
 	
 	@Override
 	public String getCategorieNaam() {
 		return this.categorieNaam;
+	}
+
+	@Override
+	public void zetWaardeopNul() {
+		this.setWaarde(0);
+		this.alIngevuld = false;
 	}
 	
 	

@@ -3,62 +3,56 @@ package model;
 import java.util.ArrayList;
 
 public class Kans implements Observer{
-	private String categorieNaam = "Kans";
 	private int waarde = 0;
-	private boolean alGebruikt = false;
-
+	private String categorieNaam = "Kans";
+	private boolean alIngevuld = false;
+	
+	
 	@Override
-	public void updateDobbelsteen(ArrayList<Dobbelsteen> dobbelstenen) {
-		// TODO Auto-generated method stub
-		
+	public void updateWaarde(ArrayList<Dobbelsteen> dobbelstenen) {
+		if(this.alIngevuld == false){
+			this.waarde = 0;
+			for(int i = 0 ; i < dobbelstenen.size() ; ++i){
+					this.waarde += dobbelstenen.get(i).getWaardeDobbelsteen();
+				}
+			}
 	}
-
+	
 	@Override
 	public void updateScore(ArrayList<Observer> observers) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
 	public int getWaarde() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.waarde;
 	}
-
+	
 	@Override
-	public void resetAlsNietGebruikt() {
-		// TODO Auto-generated method stub
-		
+	public void setWaarde(int waarde) {
+		this.waarde = waarde;
 	}
-
+	
 	@Override
-	public boolean returnIsGebruikt() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean returnIsIngevuld() {
+		return this.alIngevuld;
 	}
-
+	
 	@Override
-	public void alGebruikt() {
-		// TODO Auto-generated method stub
-		
+	public void alIngevuldOpTrue() {
+		this.alIngevuld = true;
 	}
-
-	@Override
-	public void reset() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public String getCategorieNaam() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.categorieNaam;
 	}
 
 	@Override
-	public void setWaarde(int score) {
-		// TODO Auto-generated method stub
-		
+	public void zetWaardeopNul() {
+		this.setWaarde(0);
+		this.alIngevuld = false;
 	}
 
 }
