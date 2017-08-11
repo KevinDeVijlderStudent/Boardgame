@@ -193,8 +193,7 @@ public class BoardView extends JFrame {
 		this.categorieEnScorenPanel.add(categorieNamen);
 		this.categorieNamen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String gekozenCategorie = (String)BoardView.this.categorieNamen.getSelectedItem();
-				boardcontroller.beurtEindigen(gekozenCategorie);
+				
 			}
 		});
 		
@@ -202,7 +201,7 @@ public class BoardView extends JFrame {
 		this.bevestigcategorieButton.setText("Bevestig categorie");
 		this.bevestigcategorieButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				bevestigGekozenCategorie();
+				
 			}
 		});
 		if(boardcontroller.getYathzeeSpelFacade().getAantalBeurten() == 0){
@@ -303,8 +302,5 @@ public class BoardView extends JFrame {
 		boardcontroller.getYathzeeSpelFacade().verlaagAantalBeurtenMetEen();
 	}
 	
-	//functie voor catgeorie bevestigen button
-	private void bevestigGekozenCategorie() {
-		
-	}
+	
 }

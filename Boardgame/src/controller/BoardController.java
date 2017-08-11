@@ -54,9 +54,6 @@ public class BoardController {
 		
 	}
 
-	public void beurtEindigen(String gekozenCategorie) {
-		
-	}
 	 
 	 
 }
